@@ -1,7 +1,7 @@
 import { readFileSync } from 'jsonfile';
 import { join } from 'path';
 import * as appRootPathLib from 'app-root-path';
-import * as Eris from 'eris';
+import { Client } from 'eris';
 import { URL } from 'url';
 import * as _ from 'lodash';
 import * as debug from 'debug';
@@ -15,7 +15,7 @@ const appRootPath = appRootPathLib.toString();
 const configPath = join(appRootPath, 'config', 'discord.json');
 const config = readFileSync(configPath);
 
-const bot = new Eris.Client(config.token);
+const bot = new Client(config.token);
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -57,7 +57,6 @@ function startExpress() {
 }
 
 function startOfMatch(cts: string, ts: string) {
-
   const ctIDs = JSON.parse(cts);
   const tIDs = JSON.parse(ts);
 
@@ -84,7 +83,6 @@ function startOfMatch(cts: string, ts: string) {
       const sid = new steamIDLib(steam.id);
       sid.instance = steamIDLib.Instance.DESKTOP;
       const steamID = sid.getSteamID64();
-
       if (ctIDs.includes(steamID)) {
         await moveMemberToChannel(member, config.ctChannelID);
       }else if (tIDs.includes(steamID)) {
