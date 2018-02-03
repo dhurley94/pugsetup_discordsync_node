@@ -15,18 +15,13 @@
     "@types/lodash": "^4.14.94",
     "app-root-path": "^2.0.1",
     "body-parser": "^1.18.2",
-    "bufferutil": "^3.0.3",
     "debug": "^3.1.0",
     "eris": "^0.8.3",
-    "erlpack": "abalabahaha/erlpack",
     "eslint": "^4.16.0",
-    "eventemitter3": "^3.0.0",
     "express": "^4.16.2",
     "jsonfile": "^4.0.0",
     "lodash": "^4.17.4",
-    "steamid": "^1.1.0",
-    "uws": "^9.14.0",
-    "zlib-sync": "^0.1.4"
+    "steamid": "^1.1.0"
   },
   "devDependencies": {
     "ts-node": "^4.1.0",
