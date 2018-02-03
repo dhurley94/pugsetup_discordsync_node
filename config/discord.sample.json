@@ -3,5 +3,6 @@
   "guildID": "",
   "mainChannelID": "",
   "ctChannelID": "",
-  "tChannelID": ""
+  "tChannelID": "",
+  "pass": "muffins"
 }

@@ -18,6 +18,8 @@ const config = readFileSync(configPath);
 const bot = new Eris.Client(config.token);
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -25,6 +27,14 @@ app.use(bodyParser.urlencoded({
 
 app.post('/', (req, res) => {
   const { body } = req;
+
+  if (_.has(body, 'pass') === false) {
+    return res.send('Failure');
+  }
+
+  if (body.pass !== config.pass) {
+    return res.send('Failure');
+  }
 
   if (body.state === 'start') {
     const { cts, ts } = body;
@@ -38,11 +48,13 @@ app.post('/', (req, res) => {
   res.send('Success');
 });
 
-bot.on('ready', () => {
-  app.listen(3535, () => {
-    console.log('listening on port 3535!');
+bot.on('ready', startExpress);
+
+function startExpress() {
+  app.listen(port, () => {
+    console.log(`listening on port ${port}!`);
   });
-});
+}
 
 function startOfMatch(cts: string, ts: string) {
 
@@ -75,9 +87,7 @@ function startOfMatch(cts: string, ts: string) {
 
       if (ctIDs.includes(steamID)) {
         await moveMemberToChannel(member, config.ctChannelID);
-      }
-
-      if (tIDs.includes(steamID)) {
+      }else if (tIDs.includes(steamID)) {
         await moveMemberToChannel(member, config.tChannelID);
       }
     }
