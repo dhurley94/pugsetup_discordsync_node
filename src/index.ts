@@ -64,6 +64,8 @@ function startOfMatch(cts: string, ts: string) {
     return guild.id === config.guildID;
   });
 
+  console.log('guild', guild);
+
   const mainVoice = guild.channels.find((channel) => {
     return channel.id === config.mainChannelID;
   }) as any;
