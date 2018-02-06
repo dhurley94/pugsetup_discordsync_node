@@ -85,8 +85,10 @@ function startOfMatch(cts: string, ts: string) {
       const steamID = sid.getSteamID64();
       if (ctIDs.includes(steamID)) {
         await moveMemberToChannel(member, config.ctChannelID);
+        await sleep(250);
       }else if (tIDs.includes(steamID)) {
         await moveMemberToChannel(member, config.tChannelID);
+        await sleep(250);
       }
     }
   });
@@ -128,3 +130,7 @@ async function moveMemberToChannel(member: any, channelID: string) {
 }
 
 bot.connect();
+
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
